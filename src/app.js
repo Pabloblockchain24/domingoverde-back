@@ -17,6 +17,7 @@ app.use(cookieParser())
 const allowedOrigins = [
     '*',
     'https://server-domingoverde.vercel.app',
+    'http://localhost:4321',
 ];
 
 const corsOptions = {
