@@ -1,0 +1,50 @@
+import mongoose from "mongoose";
+
+const productoSchema = new mongoose.Schema({
+  id: String,
+  nombre: String,
+  precio: Number,
+  image: String,
+  category: String,
+  cantidad: {
+    type: Number,
+    default: 1
+  }
+});
+
+const orderSchema = new mongoose.Schema(
+  {
+    nVenta: { type: Number, unique: true, index: true },
+    nombre: { type: String, required: true },
+    apellido: { type: String, required: true },
+    celular: { type: String, required: true },
+    direccion: { type: String, required: true },
+    horaEntrega: { type: String, required: true },
+
+
+    metodoPago: {
+      type: String,
+      enum: ["efectivo", "webpay"],
+      required: true,
+    },
+
+    productos: [productoSchema],
+
+    total: { type: Number, required: true },
+
+    estadoEntrega: {
+      type: String,
+      enum: ["pendiente", "fallida", "entregado"],
+      default: "pendiente",
+    },
+    estadoPago: {
+      type: String,
+      enum: ["pendiente", "pagado"],
+      default: "pendiente",
+    },
+  },
+  { timestamps: true }
+);
+
+const Order = mongoose.model("Order", orderSchema);
+export default Order;
