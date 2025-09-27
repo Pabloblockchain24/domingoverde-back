@@ -16,7 +16,7 @@ app.use(cookieParser())
 
 const allowedOrigins = [
     '*',
-    'https://server-domingoverde.vercel.app',
+    'https://domingoverde-back.vercel.app',
     'http://localhost:4321',
 ];
 
