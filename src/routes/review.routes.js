@@ -11,3 +11,5 @@ const router = express.Router();
 router.get("/", getReviews);
 router.post("/", createReview);
 router.delete("/:id", deleteReview) 
+
+export default router;
