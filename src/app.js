@@ -8,6 +8,8 @@ import purchasesRoutes from "./routes/purchases.routes.js";
 import campaignRoutes from "./routes/campaigns.routes.js";
 import goalsRoutes from "./routes/goal.routes.js"
 import authRoutes from "./routes/auth.routes.js";
+import reviewRoutes from "./routes/review.routes.js";
+
 
 const app = express()
 app.use(express.json())
@@ -43,5 +45,6 @@ app.use("/api/purchases", purchasesRoutes);
 app.use("/api/campaigns", campaignRoutes);
 app.use("/api/goals", goalsRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 export default app; 
