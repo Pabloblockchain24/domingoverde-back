@@ -9,6 +9,7 @@ import campaignRoutes from "./routes/campaigns.routes.js";
 import goalsRoutes from "./routes/goal.routes.js"
 import authRoutes from "./routes/auth.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
+import recipeRoutes from "./routes/recipes.routes.js";
 
 
 const app = express()
@@ -39,12 +40,13 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Rutas
+app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/purchases", purchasesRoutes);
 app.use("/api/campaigns", campaignRoutes);
 app.use("/api/goals", goalsRoutes);
-app.use("/api/auth", authRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/recipes", recipeRoutes);
 
 export default app; 
