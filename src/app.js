@@ -21,6 +21,7 @@ const allowedOrigins = [
     '*',
     'https://domingoverde-back.vercel.app',
     'https://domingoverde-front.vercel.app',
+    'http://localhost:4321'
 ];
 
 const corsOptions = {
