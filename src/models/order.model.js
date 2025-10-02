@@ -42,6 +42,10 @@ const orderSchema = new mongoose.Schema(
       enum: ["pendiente", "pagado"],
       default: "pendiente",
     },
+    fechaVenta: {
+      type: String,
+      default: () => new Date().toLocaleDateString("es-CL"), 
+    }
   },
   { timestamps: true }
 );
