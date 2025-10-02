@@ -1,15 +1,26 @@
+// lib/db.js
 import mongoose from "mongoose";
 import config from "./config/config.js";
 
-export const connectDB = async() => {
-    await mongoose.connect(config.MONGO_URL)
-    .then(() => {
-        console.log("✅  Conectado a la base de datos")
-    })
-    .catch(error => {
-        console.error("Error al conectarse a la base de datos", error);
-    })
-}
+// Guardamos el estado de la conexión
+let isConnected = null;
 
+export const connectDB = async () => {
+  if (isConnected) {
+    // Ya está conectado → reutilizamos
+    return;
+  }
 
+  try {
+    const db = await mongoose.connect(config.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
+    isConnected = db.connections[0].readyState;
+    console.log("✅ MongoDB conectado:", isConnected === 1 ? "READY" : "NOT READY");
+  } catch (error) {
+    console.error("❌ Error al conectar con MongoDB:", error);
+    throw error;
+  }
+};
