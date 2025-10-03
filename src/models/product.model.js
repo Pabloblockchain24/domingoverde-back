@@ -8,6 +8,8 @@ const productSchema = new mongoose.Schema({
   category: String,
   image: String,
   stock: Number,
+  inventoryItem: String,
+  inventoryQuantity: Number,
   destacado: {
     type: Boolean,
     default: false, // por defecto no es destacado
