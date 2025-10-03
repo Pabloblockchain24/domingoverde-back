@@ -4,7 +4,7 @@ import Purchase from "../models/purchase.model.js";
 // Crear una compra
 export const crearCompra = async (req, res) => {
   try {
-    const { proveedor, fecha, productos, metodoPago, total } = req.body;
+    const { proveedor, fecha, productos, metodoPago, fechaCompra, total } = req.body;
 
     // Buscar la última compra para calcular el próximo número correlativo
     const ultimaCompra = await Purchase.findOne().sort({ nCompra: -1 });
@@ -17,6 +17,7 @@ export const crearCompra = async (req, res) => {
       productos,
       total,
       metodoPago,
+      fechaCompra,
       estadoEntrega: "pendiente",
       estadoPago: "pendiente",
     });

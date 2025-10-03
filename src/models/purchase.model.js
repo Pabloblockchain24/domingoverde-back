@@ -29,7 +29,11 @@ const purchaseSchema = new mongoose.Schema(
     productos: [productoSchema],
     metodoPago: { type: String, required: true },
     total: { type: Number, required: true },
-
+    fechaCompra:  {
+      type: String,
+      default: () => new Date().toLocaleDateString("es-CL"), 
+    }
+    
   },
   { timestamps: true }
 );
