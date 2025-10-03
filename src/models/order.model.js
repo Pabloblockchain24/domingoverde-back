@@ -9,7 +9,9 @@ const productoSchema = new mongoose.Schema({
   cantidad: {
     type: Number,
     default: 1
-  }
+  },
+  inventoryItem: String,
+  inventoryQuantity: Number
 });
 
 const orderSchema = new mongoose.Schema(
@@ -20,8 +22,6 @@ const orderSchema = new mongoose.Schema(
     celular: { type: String, required: true },
     direccion: { type: String, required: true },
     horaEntrega: { type: String, required: true },
-
-
     metodoPago: {
       type: String,
       enum: ["efectivo", "transferencia", "tarjeta"],

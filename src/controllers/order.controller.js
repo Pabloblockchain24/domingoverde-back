@@ -5,7 +5,7 @@ import Counter from "../models/counter.model.js";
 // controllers/orderController.js
 
 export const crearOrden = async (req, res) => {
-  try {
+      try {
     // Obtener el próximo número atómicamente
     const counter = await Counter.findOneAndUpdate(
       { name: "ventas" },
@@ -19,7 +19,6 @@ export const crearOrden = async (req, res) => {
       estadoEntrega: "pendiente",
       estadoPago: "pendiente"
     });
-
     const ordenGuardada = await nuevaOrden.save();
     res.status(201).json(ordenGuardada);
   } catch (error) {
