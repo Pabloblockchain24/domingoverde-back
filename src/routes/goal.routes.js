@@ -8,6 +8,6 @@ import {
 const router = express.Router();
 
 router.get("/", obtenerGoals);
-router.patch("/", editGoals);
+router.put("/", editGoals);
 
 export default router;
