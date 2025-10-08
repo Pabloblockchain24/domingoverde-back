@@ -18,6 +18,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 const allowedOrigins = [
+   'https://www.domingoverde.cl',
     '*',
     'https://domingoverde-back.vercel.app',
     'https://domingoverde-front.vercel.app',
