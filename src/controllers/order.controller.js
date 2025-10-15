@@ -24,6 +24,8 @@ export const crearOrden = async (req, res) => {
 
     const ordenGuardada = await nuevaOrden.save();
 
+    console.log("Holaaa")
+
     // 🔹 Enviar correo solo si es ventaPagina
     if (ordenGuardada.ventaPagina) {
       // Configuración del transporter
