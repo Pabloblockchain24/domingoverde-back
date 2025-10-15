@@ -24,8 +24,6 @@ export const crearOrden = async (req, res) => {
 
     const ordenGuardada = await nuevaOrden.save();
 
-    console.log("Holaaa")
-
     // 🔹 Enviar correo solo si es ventaPagina
     if (ordenGuardada.ventaPagina) {
       // Configuración del transporter
@@ -39,7 +37,7 @@ export const crearOrden = async (req, res) => {
 
       // Contenido del correo
       const mailOptions = {
-        from: '"Domingo Verde" <ventas.domingoverde@gmail.com>',
+        from: '"Domingo Verde 🌿 | Notificaciones" <ventas.domingoverde@gmail.com>',
         to: "ventas.domingoverde@gmail.com",
         subject: `Nueva orden #${ordenGuardada.nVenta}`,
         html: `
