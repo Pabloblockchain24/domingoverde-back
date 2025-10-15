@@ -34,6 +34,7 @@ export const crearOrden = async (req, res) => {
       // Configuración del transporter
       const transporter = nodemailer.createTransport({
         service: "gmail",
+        port:587,
         auth: {
           user: config.GMAIL_USER,
           pass: config.GMAIL_APP_PASSWORD,
