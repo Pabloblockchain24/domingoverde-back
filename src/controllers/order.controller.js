@@ -81,7 +81,7 @@ export const crearOrden = async (req, res) => {
               <td style="padding: 8px;">${p.nombre}</td>
               <td style="text-align:center; padding: 8px;">${p.cantidad}</td>
               <td style="text-align:right; padding: 8px;">$${p.precio}</td>
-              <td style="padding: 8px;">${p.categoria}</td>
+              <td style="padding: 8px;">${p.category}</td>
             </tr>
           `
             )
