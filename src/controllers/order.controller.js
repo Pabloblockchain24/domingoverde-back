@@ -26,8 +26,8 @@ export const crearOrden = async (req, res) => {
 
     console.log("Hola")
     console.log("La orden guarada es:", ordenGuardada)
-    console.log("config.GMAIL_USER", GMAIL_USER)
-    console.log("config.GMAIL_APP_PASSWORD", GMAIL_APP_PASSWORD)
+    console.log("config.GMAIL_USER", config.GMAIL_USER)
+    console.log("config.GMAIL_APP_PASSWORD", config.GMAIL_APP_PASSWORD)
 
     // 🔹 Enviar correo solo si es ventaPagina
     if (ordenGuardada.ventaPagina) {
