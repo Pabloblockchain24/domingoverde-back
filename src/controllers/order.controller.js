@@ -36,8 +36,8 @@ export const crearOrden = async (req, res) => {
         service: "gmail",
         port:587,
         auth: {
-          user: config.GMAIL_USER,
-          pass: config.GMAIL_APP_PASSWORD,
+          user: "ventas.domingoverde@gmail.com" ,
+          pass: "ghon qbcw vatd wxjr"
         },
       });
 
