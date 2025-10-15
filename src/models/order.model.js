@@ -45,6 +45,10 @@ const orderSchema = new mongoose.Schema(
     fechaVenta: {
       type: String,
       default: () => new Date().toLocaleDateString("es-CL"), 
+    },
+    ventaPagina: {
+      type: Boolean,
+      default: false,
     }
   },
   { timestamps: true }
