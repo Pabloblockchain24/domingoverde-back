@@ -2,7 +2,7 @@
 import Order from "../models/order.model.js";
 import Counter from "../models/counter.model.js";
 import config from "../config/config.js"
-import brevo from "@getbrevo/brevo";
+import Brevo from "@getbrevo/brevo";
 
 export const crearOrden = async (req, res) => {
   try {
@@ -22,16 +22,16 @@ export const crearOrden = async (req, res) => {
 
     const ordenGuardada = await nuevaOrden.save();
     console.log("Orden guardada:", ordenGuardada);
+    console.log("BREVO_API_KEY", config.BREVO_API_KEY) 
 
     // 🔹 Solo enviar correo si la venta es desde la página
     if (ordenGuardada.ventaPagina) {
       // Configurar cliente Brevo
-      const apiInstance = new brevo.TransactionalEmailsApi();
-      apiInstance.setApiKey(
-        brevo.TransactionalEmailsApiApiKeys.apiKey,
-        config.BREVO_API_KEY
-      );
-
+        const apiInstance = new Brevo.TransactionalEmailsApi();
+        apiInstance.setApiKey(
+          Brevo.TransactionalEmailsApiApiKeys.apiKey,
+          config.BREVO_API_KEY
+        );
       // Construir HTML del correo
       const productosHTML = ordenGuardada.productos
         .map(
