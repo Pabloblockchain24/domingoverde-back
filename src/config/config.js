@@ -7,5 +7,8 @@ export default{
     MONGO_URL: process.env.MONGO_URL,
     TOKEN_SECRET: process.env.TOKEN_SECRET,
     GMAIL_USER: process.env.GMAIL_USER,
-    GMAIL_APP_PASSWORD: process.env.GMAIL_APP_PASSWORD
+    GMAIL_APP_PASSWORD: process.env.GMAIL_APP_PASSWORD,
+  BREVO_API_KEY: process.env.BREVO_API_KEY,
+  BREVO_SENDER: process.env.BREVO_SENDER,
+  BREVO_DESTINO: process.env.BREVO_DESTINO,
 }
