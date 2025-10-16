@@ -24,11 +24,6 @@ export const crearOrden = async (req, res) => {
 
     const ordenGuardada = await nuevaOrden.save();
 
-    console.log("Hola")
-    console.log("La orden guarada es:", ordenGuardada)
-    console.log("config.GMAIL_USER", config.GMAIL_USER)
-    console.log("config.GMAIL_APP_PASSWORD", config.GMAIL_APP_PASSWORD)
-
     // 🔹 Enviar correo solo si es ventaPagina
     if (ordenGuardada.ventaPagina) {
       // Configuración del transporter
@@ -36,14 +31,14 @@ export const crearOrden = async (req, res) => {
         service: "gmail",
         port:587,
         auth: {
-          user: "ventas.domingoverde@gmail.com" ,
-          pass: "ghon qbcw vatd wxjr"
+          user: "parcepaiva@gmail.com" ,
+          pass: "kzhv qqcw fwtd qvxq"
         },
       });
 
       // Contenido del correo
       const mailOptions = {
-        from: '"Domingo Verde 🌿 | Notificaciones" <ventas.domingoverde@gmail.com>',
+        from: '"Domingo Verde 🌿 | Notificaciones" <parcepaiva@gmail.com>',
         to: "ventas.domingoverde@gmail.com",
         subject: `Nueva orden #${ordenGuardada.nVenta}`,
         html: `
