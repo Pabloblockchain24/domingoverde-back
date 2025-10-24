@@ -25,9 +25,15 @@ const reviewSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      default: "", // URL de la foto o avatar
+      default: "", 
     },
-  },
+    orderId:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Order",
+      required: false
+    }
+    
+    },
   {
     timestamps: true,
   }

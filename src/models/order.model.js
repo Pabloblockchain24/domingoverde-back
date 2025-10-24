@@ -8,10 +8,10 @@ const productoSchema = new mongoose.Schema({
   category: String,
   cantidad: {
     type: Number,
-    default: 1
+    default: 1,
   },
   inventoryItem: String,
-  inventoryQuantity: Number
+  inventoryQuantity: Number,
 });
 
 const orderSchema = new mongoose.Schema(
@@ -44,9 +44,22 @@ const orderSchema = new mongoose.Schema(
     },
     fechaVenta: {
       type: String,
-      default: () => new Date().toLocaleDateString("es-CL"), 
+      default: () => new Date().toLocaleDateString("es-CL"),
     },
     ventaPagina: {
+      type: Boolean,
+      default: false,
+    },
+    reviewToken: {
+      type: String,
+      default: null,
+      unique: true,
+      sparse: true,
+    },
+    reviewTokenExpires: {
+      type: Date,
+    },
+    orderReview: {
       type: Boolean,
       default: false,
     }

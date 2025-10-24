@@ -5,7 +5,8 @@ import {
   obtenerOrdenes,
   obtenerOrdenPorId,
   actualizarEstadoOrden, // <- importamos el nuevo controller
-  eliminarOrden
+  eliminarOrden,
+  generarReviewToken
 } from "../controllers/order.controller.js";
 
 
@@ -18,5 +19,6 @@ router.get("/:id", obtenerOrdenPorId);
 // Nueva ruta para actualizar estado
 router.patch("/:id", actualizarEstadoOrden);
 router.delete("/:id", eliminarOrden);
+router.patch("/token/:id", generarReviewToken);
 
 export default router;

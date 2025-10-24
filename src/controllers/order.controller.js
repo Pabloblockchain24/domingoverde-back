@@ -1,8 +1,9 @@
 // controllers/orderController.js
 import Order from "../models/order.model.js";
 import Counter from "../models/counter.model.js";
-import config from "../config/config.js"
+import config from "../config/config.js";
 import Brevo from "@getbrevo/brevo";
+import crypto from "crypto";
 
 export const crearOrden = async (req, res) => {
   try {
@@ -22,16 +23,16 @@ export const crearOrden = async (req, res) => {
 
     const ordenGuardada = await nuevaOrden.save();
     console.log("Orden guardada:", ordenGuardada);
-    console.log("BREVO_API_KEY", config.BREVO_API_KEY) 
+    console.log("BREVO_API_KEY", config.BREVO_API_KEY);
 
     // 🔹 Solo enviar correo si la venta es desde la página
     if (ordenGuardada.ventaPagina) {
       // Configurar cliente Brevo
-        const apiInstance = new Brevo.TransactionalEmailsApi();
-        apiInstance.setApiKey(
-          Brevo.TransactionalEmailsApiApiKeys.apiKey,
-          config.BREVO_API_KEY
-        );
+      const apiInstance = new Brevo.TransactionalEmailsApi();
+      apiInstance.setApiKey(
+        Brevo.TransactionalEmailsApiApiKeys.apiKey,
+        config.BREVO_API_KEY
+      );
       // Construir HTML del correo
       const productosHTML = ordenGuardada.productos
         .map(
@@ -40,7 +41,9 @@ export const crearOrden = async (req, res) => {
             <td style="padding: 8px;">${p.nombre}</td>
             <td style="text-align:center; padding: 8px;">${p.cantidad}</td>
             <td style="text-align:right; padding: 8px;">$${p.precio}</td>
-            <td style="text-align:right; padding: 8px;">$${p.cantidad * p.precio}</td>
+            <td style="text-align:right; padding: 8px;">$${
+              p.cantidad * p.precio
+            }</td>
           </tr>
         `
         )
@@ -76,7 +79,10 @@ export const crearOrden = async (req, res) => {
       // Enviar correo
       const sendSmtpEmail = {
         to: [{ email: config.BREVO_DESTINO, name: "Ventas Domingo Verde" }],
-        sender: { email: config.BREVO_SENDER, name: "Domingo Verde 🌿 | Notificaciones" },
+        sender: {
+          email: config.BREVO_SENDER,
+          name: "Domingo Verde 🌿 | Notificaciones",
+        },
         subject: `Nueva orden #${ordenGuardada.nVenta}`,
         htmlContent,
       };
@@ -92,8 +98,6 @@ export const crearOrden = async (req, res) => {
   }
 };
 
-
-
 export const obtenerOrdenes = async (req, res) => {
   try {
     const ordenes = await Order.find().sort({ createdAt: -1 });
@@ -103,7 +107,6 @@ export const obtenerOrdenes = async (req, res) => {
     res.status(500).json({ error: "Error al obtener las órdenes" });
   }
 };
-
 
 export const obtenerOrdenPorId = async (req, res) => {
   try {
@@ -164,5 +167,35 @@ export const eliminarOrden = async (req, res) => {
   } catch (error) {
     console.error("Error al eliminar la orden:", error);
     res.status(500).json({ error: "Error al eliminar la orden" });
+  }
+};
+
+export const generarReviewToken = async (req, res) => {
+
+  try {
+    const { id } = req.params;
+    const token = crypto.randomBytes(32).toString("hex");
+    const expiresAt = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
+
+    const ordenActualizada = await Order.findByIdAndUpdate(
+      id,
+      { reviewToken: token, reviewTokenExpires: expiresAt },
+      { new: true }
+    );
+
+    if (!ordenActualizada) {
+      return res.status(404).json({ error: "Orden no encontrada" });
+    }
+
+    const reviewLink = `${process.env.FRONTEND_URL}/review?token=${token}`;
+
+    res.json({
+      message: "Token de reseña generado correctamente",
+      reviewToken: token,
+      reviewLink,
+    });
+  } catch (error) {
+    console.error("Error al generar el token de review:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
   }
 };
