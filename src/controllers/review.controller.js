@@ -63,11 +63,13 @@ export const createReview = async (req, res) => {
       date: new Date(),
       orderId,
     });
-
+    
     const savedReview = await newReview.save();
-    order.orderReview = true;
-    order.reviewToken = null;
-    await order.save();
+       
+    await Order.updateOne(
+      { _id: order._id },
+      { $set: { orderReview: true }, $unset: { reviewToken: "" } }
+    );
     res.status(201).json(savedReview);
   } catch (error) {
     console.log("error", error);
