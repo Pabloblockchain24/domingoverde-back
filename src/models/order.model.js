@@ -53,7 +53,6 @@ const orderSchema = new mongoose.Schema(
     reviewToken: {
       type: String,
       default: null,
-      unique: true,
       sparse: true,
     },
     reviewTokenExpires: {
