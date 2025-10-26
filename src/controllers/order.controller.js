@@ -187,7 +187,7 @@ export const generarReviewToken = async (req, res) => {
       return res.status(404).json({ error: "Orden no encontrada" });
     }
 
-    const reviewLink = `${process.env.FRONTEND_URL}/review?token=${token}`;
+    const reviewLink = `domingoverde.cl/review?token=${token}`;
 
     res.json({
       message: "Token de reseña generado correctamente",
