@@ -17,7 +17,7 @@ export const getReviews = async (req, res) => {
 // Crear un review
 export const createReview = async (req, res) => {
   try {
-    const { name, rating, comment, orderId } = req.body;
+    const { name, rating, comment, orderId, category } = req.body;
 
     if (!name || !rating || !comment) {
       return res
@@ -62,6 +62,7 @@ export const createReview = async (req, res) => {
       photo: photoUrl,
       date: new Date(),
       orderId,
+      category
     });
     
     const savedReview = await newReview.save();

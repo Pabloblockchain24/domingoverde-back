@@ -31,6 +31,11 @@ const reviewSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Order",
       required: false
+    },
+    category: {
+      type: String,
+      required: true,
+      default: ""
     }
     
     },
