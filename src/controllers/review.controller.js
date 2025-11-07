@@ -118,11 +118,13 @@ export const getReviewByToken = async (req, res) => {
       ? order.apellido.charAt(0).toUpperCase()
       : "";
     const nombreCompleto = `${order.nombre} ${firstLetterApellido}.`;
+    const category = order.productos[0]?.category || "";
 
     res.json({
       valid: true,
       nombre: nombreCompleto,
       productos: productosNombres,
+      category: category,
       orderId: order._id,
     });
   } catch (err) {
