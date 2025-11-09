@@ -14,6 +14,5 @@ router.get("/", getReviews);
 router.post("/", upload.single("photo"), createReview);
 router.delete("/:id", deleteReview) 
 
-
 router.get("/:token", getReviewByToken)
 export default router;

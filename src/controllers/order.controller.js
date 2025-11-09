@@ -4,6 +4,9 @@ import Counter from "../models/counter.model.js";
 import config from "../config/config.js";
 import Brevo from "@getbrevo/brevo";
 import crypto from "crypto";
+import { nanoid } from "nanoid";
+import ShortLink from "../models/shortLink.model.js";
+
 
 export const crearOrden = async (req, res) => {
   try {
@@ -187,12 +190,14 @@ export const generarReviewToken = async (req, res) => {
       return res.status(404).json({ error: "Orden no encontrada" });
     }
 
-    const reviewLink = `domingoverde.cl/review?token=${token}`;
+    const code = nanoid(6);
+    const shortUrl = `https://domingoverde.cl/r/${code}`;
+    await ShortLink.create({ code, originalUrl: reviewLink });
 
     res.json({
       message: "Token de reseña generado correctamente",
       reviewToken: token,
-      reviewLink,
+      shortUrl,
     });
   } catch (error) {
     console.error("Error al generar el token de review:", error);
