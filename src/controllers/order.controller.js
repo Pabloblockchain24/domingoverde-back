@@ -190,6 +190,7 @@ export const generarReviewToken = async (req, res) => {
       return res.status(404).json({ error: "Orden no encontrada" });
     }
 
+    const reviewLink = `https://domingoverde.cl/review?token=${token}`;
     const code = nanoid(6);
     const shortUrl = `https://domingoverde.cl/r/${code}`;
     await ShortLink.create({ code, originalUrl: reviewLink });
